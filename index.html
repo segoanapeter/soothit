@@ -1,12 +1,1949 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Sooth IT | Tech trouble. Soothed.</title>
+
+  <meta
+    name="description"
+    content="Friendly personal IT support for computers, Wi-Fi, email, device setup, security and everyday technology problems."
+  />
+
+  <meta name="theme-color" content="#07111f" />
+
+  <style>
+    :root {
+      --navy: #07111f;
+      --navy-2: #0b1728;
+      --navy-3: #102238;
+      --blue: #59b7ff;
+      --blue-2: #85d7ff;
+      --mint: #68e0c1;
+      --cream: #f7f5ef;
+      --white: #ffffff;
+      --text: #142235;
+      --muted: #637083;
+      --line: #dfe7ef;
+      --soft: #eef6fb;
+      --shadow: 0 20px 50px rgba(7, 17, 31, 0.12);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    /* ------------------------------
+       HEADER
+    ------------------------------ */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(223, 231, 239, 0.8);
+    }
+
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.25rem;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 30% 30%, #8ceaff, transparent 35%),
+        linear-gradient(135deg, #4e8fff, #55d4bc);
+      box-shadow: 0 10px 30px rgba(72, 158, 255, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 100px;
+    }
+
+    .brand-mark::before {
+      width: 23px;
+      height: 8px;
+      transform: rotate(-24deg);
+    }
+
+    .brand-mark::after {
+      width: 8px;
+      height: 23px;
+      transform: rotate(24deg);
+      opacity: 0.8;
+    }
+
+    .brand span {
+      color: #419fd8;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 0.95rem;
+      font-weight: 650;
+      color: #415067;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 19px;
+      border-radius: 100px;
+      background: var(--navy);
+      color: var(--white) !important;
+      transition: 0.25s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      background: #102b49;
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 13px;
+      background: var(--soft);
+      color: var(--navy);
+      font-size: 1.5rem;
+    }
+
+    /* ------------------------------
+       HERO
+    ------------------------------ */
+
+    .hero {
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(83, 195, 255, 0.23), transparent 27%),
+        radial-gradient(circle at 65% 75%, rgba(104, 224, 193, 0.14), transparent 30%),
+        linear-gradient(145deg, #06101d, #0a192a 55%, #0a2237);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.28;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: linear-gradient(to bottom, black, transparent);
+    }
+
+    .hero-inner {
+      min-height: 720px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 70px;
+      position: relative;
+      z-index: 2;
+      padding-block: 80px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 100px;
+      color: #cfeaff;
+      font-size: 0.84rem;
+      font-weight: 750;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mint);
+      box-shadow: 0 0 16px var(--mint);
+    }
+
+    .hero h1 {
+      font-size: clamp(3.3rem, 7vw, 6.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.065em;
+      max-width: 800px;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: #77d5ff;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      color: #bdc9d9;
+      font-size: 1.15rem;
+      margin-top: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 100px;
+      font-weight: 800;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #63c9ff, #71e1c4);
+      color: #06121f;
+      box-shadow: 0 15px 34px rgba(77, 196, 255, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(77, 196, 255, 0.32);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.07);
+      color: white;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.12);
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      color: #90a2b6;
+      font-size: 0.92rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 510px;
+      display: grid;
+      place-items: center;
+    }
+
+    .calm-orbit {
+      width: min(480px, 95%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle, rgba(80,181,255,.14), transparent 60%);
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+    .calm-orbit::before,
+    .calm-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .calm-orbit::before {
+      inset: 50px;
+    }
+
+    .calm-orbit::after {
+      inset: 100px;
+    }
+
+    .center-card {
+      width: 240px;
+      padding: 26px;
+      border-radius: 28px;
+      text-align: center;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.13);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 30px 80px rgba(0,0,0,.25);
+      z-index: 2;
+    }
+
+    .center-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 16px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #5ebfff, #6de1c4);
+      color: var(--navy);
+      font-size: 2rem;
+    }
+
+    .center-card strong {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 5px;
+    }
+
+    .center-card span {
+      color: #acc0d5;
+      font-size: 0.9rem;
+    }
+
+    .float-card {
+      position: absolute;
+      padding: 14px 17px;
+      border-radius: 16px;
+      background: rgba(11, 29, 48, .94);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #d7e4ef;
+      font-size: 0.88rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,.24);
+    }
+
+    .float-card b {
+      color: #74d8ff;
+    }
+
+    .float-a {
+      top: 55px;
+      right: 5px;
+    }
+
+    .float-b {
+      left: 5px;
+      bottom: 95px;
+    }
+
+    .float-c {
+      bottom: 35px;
+      right: 45px;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+    }
+
+    /* ------------------------------
+       TRUST STRIP
+    ------------------------------ */
+
+    .trust-strip {
+      border-bottom: 1px solid var(--line);
+      background: white;
+    }
+
+    .trust-inner {
+      min-height: 92px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+    }
+
+    .trust-item {
+      padding: 18px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-right: 1px solid var(--line);
+    }
+
+    .trust-item:last-child {
+      border-right: 0;
+    }
+
+    .trust-item strong {
+      color: var(--text);
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+
+    /* ------------------------------
+       GENERAL SECTIONS
+    ------------------------------ */
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 48px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      color: #238ab8;
+      font-weight: 850;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      margin-bottom: 14px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      letter-spacing: -0.055em;
+      line-height: 1.02;
+    }
+
+    .section-head p {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    /* ------------------------------
+       ISSUE SELECTOR
+    ------------------------------ */
+
+    .problems {
+      background: var(--cream);
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .problem-card {
+      min-height: 205px;
+      padding: 24px;
+      background: white;
+      border: 1px solid #e8e5dc;
+      border-radius: 22px;
+      transition: 0.25s ease;
+      text-align: left;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-5px);
+      border-color: #a6dbf3;
+      box-shadow: var(--shadow);
+    }
+
+    .problem-card.active {
+      border-color: #62bff1;
+      background: #f3fbff;
+      box-shadow: 0 14px 35px rgba(66, 166, 217, 0.16);
+    }
+
+    .problem-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: var(--soft);
+      font-size: 1.45rem;
+      margin-bottom: 22px;
+    }
+
+    .problem-card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 7px;
+      line-height: 1.3;
+    }
+
+    .problem-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .problem-arrow {
+      position: absolute;
+      right: 18px;
+      bottom: 16px;
+      color: #5faed1;
+      font-weight: 900;
+    }
+
+    /* ------------------------------
+       HOW IT WORKS
+    ------------------------------ */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      position: relative;
+    }
+
+    .step {
+      padding: 26px 8px;
+    }
+
+    .step-number {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--navy);
+      color: white;
+      font-weight: 900;
+      margin-bottom: 22px;
+    }
+
+    .step h3 {
+      font-size: 1.12rem;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    /* ------------------------------
+       SERVICES
+    ------------------------------ */
+
+    .services {
+      background: var(--navy);
+      color: white;
+    }
+
+    .services .section-head p {
+      color: #9fb0c4;
+    }
+
+    .services .section-kicker {
+      color: #6ed4ff;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      padding: 30px;
+      min-height: 245px;
+      border-radius: 24px;
+      background: #0d1b2d;
+      border: 1px solid rgba(255,255,255,.08);
+      transition: 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      background: #11243a;
+      border-color: rgba(101,207,255,.3);
+    }
+
+    .service-card .service-icon {
+      font-size: 1.6rem;
+      margin-bottom: 28px;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: #9eafc2;
+      font-size: 0.92rem;
+    }
+
+    /* ------------------------------
+       PROMISE
+    ------------------------------ */
+
+    .promise-layout {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .promise-art {
+      min-height: 480px;
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,.85), transparent 15%),
+        linear-gradient(145deg, #bceeff, #d8faef);
+      display: grid;
+      place-items: center;
+      padding: 35px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promise-art-card {
+      width: 80%;
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(18px);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 25px 60px rgba(33, 108, 145, 0.16);
+      transform: rotate(-3deg);
+    }
+
+    .promise-art-card span {
+      color: #2d829f;
+      font-weight: 800;
+      font-size: 0.8rem;
+    }
+
+    .promise-art-card h3 {
+      font-size: 1.65rem;
+      letter-spacing: -0.04em;
+      margin: 8px 0;
+    }
+
+    .promise-art-card p {
+      color: var(--muted);
+    }
+
+    .promise-copy h2 {
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+      margin-bottom: 24px;
+    }
+
+    .promise-copy > p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      margin-bottom: 28px;
+    }
+
+    .promise-points {
+      display: grid;
+      gap: 14px;
+    }
+
+    .promise-point {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .check {
+      flex: 0 0 auto;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #daf8ee;
+      color: #128467;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    /* ------------------------------
+       FAQ / TRUST
+    ------------------------------ */
+
+    .faq {
+      background: #f7fafc;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    details {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px 22px;
+    }
+
+    summary {
+      list-style: none;
+      font-weight: 800;
+      cursor: pointer;
+      position: relative;
+      padding-right: 25px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      top: -2px;
+      color: #419fc7;
+      font-size: 1.4rem;
+    }
+
+    details[open] summary::after {
+      content: "–";
+    }
+
+    details p {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    /* ------------------------------
+       SUPPORT
+    ------------------------------ */
+
+    .support {
+      padding: 110px 0;
+      background:
+        radial-gradient(circle at 90% 15%, rgba(88,194,255,.16), transparent 25%),
+        linear-gradient(145deg, #081321, #0d2238);
+      color: white;
+    }
+
+    .support-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .support-copy h2 {
+      font-size: clamp(2.7rem, 5vw, 4.8rem);
+      letter-spacing: -0.06em;
+      line-height: 0.98;
+      margin-bottom: 24px;
+    }
+
+    .support-copy p {
+      color: #a9bbce;
+      max-width: 500px;
+    }
+
+    .support-mini {
+      margin-top: 36px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .support-mini div {
+      display: flex;
+      gap: 12px;
+      color: #c4d2df;
+      font-size: 0.94rem;
+    }
+
+    .support-box {
+      background: white;
+      color: var(--text);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.2);
+    }
+
+    .support-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+      letter-spacing: -0.035em;
+    }
+
+    .support-box > p {
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid #d7e1ea;
+      border-radius: 13px;
+      padding: 13px 14px;
+      outline: none;
+      color: var(--text);
+      background: #fbfdff;
+      transition: 0.2s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: #66bde5;
+      box-shadow: 0 0 0 4px rgba(96, 187, 229, .12);
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-note {
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: #7c8998;
+    }
+
+    .support-result {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #eef9ff;
+      color: #27687f;
+      font-size: 0.9rem;
+    }
+
+    /* ------------------------------
+       FINAL CTA
+    ------------------------------ */
+
+    .final-cta {
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .final-card {
+      background: linear-gradient(145deg, #dff6ff, #ebfff8);
+      border-radius: 36px;
+      padding: 80px 30px;
+    }
+
+    .final-card h2 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: -0.065em;
+      line-height: 1;
+      max-width: 850px;
+      margin: 0 auto 18px;
+    }
+
+    .final-card p {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    /* ------------------------------
+       FOOTER
+    ------------------------------ */
+
+    footer {
+      background: #050d17;
+      color: #98aabc;
+      padding: 60px 0 30px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 45px;
+      padding-bottom: 45px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .footer-brand {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .footer-copy {
+      max-width: 390px;
+      font-size: 0.92rem;
+    }
+
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 0.88rem;
+    }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 0.82rem;
+    }
+
+    /* ------------------------------
+       RESPONSIVE
+    ------------------------------ */
+
+    @media (max-width: 960px) {
+      .hero-inner,
+      .promise-layout,
+      .support-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        padding-top: 90px;
+      }
+
+      .hero-visual {
+        min-height: 430px;
+      }
+
+      .problem-grid,
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust-item:nth-child(2) {
+        border-right: 0;
+      }
+
+      .trust-item:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav {
+        height: 70px;
+      }
+
+      .mobile-toggle {
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 14px;
+        right: 14px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        background: white;
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px 10px;
+      }
+
+      .nav-cta {
+        margin-top: 6px;
+      }
+
+      .hero,
+      .hero-inner {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        padding: 80px 0 50px;
+        gap: 25px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 15vw, 4.8rem);
+      }
+
+      .hero-copy {
+        font-size: 1rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 390px;
+      }
+
+      .calm-orbit {
+        width: 360px;
+        max-width: 95vw;
+      }
+
+      .float-card {
+        font-size: 0.75rem;
+        padding: 11px 12px;
+      }
+
+      section {
+        padding: 74px 0;
+      }
+
+      .problem-grid,
+      .service-grid,
+      .steps,
+      .faq-grid,
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-card {
+        min-height: auto;
+      }
+
+      .trust-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .promise-layout {
+        gap: 42px;
+      }
+
+      .promise-art {
+        min-height: 360px;
+      }
+
+      .support-box {
+        padding: 24px 19px;
+      }
+
+      .final-card {
+        padding: 60px 18px;
+        border-radius: 26px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 470px) {
+      .trust-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-visual {
+        min-height: 330px;
+      }
+
+      .calm-orbit {
+        width: 300px;
+      }
+
+      .center-card {
+        width: 195px;
+        padding: 20px;
+      }
+
+      .float-a {
+        top: 22px;
+      }
+
+      .float-b {
+        bottom: 55px;
+      }
+
+      .float-c {
+        bottom: 6px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Sooth IT</h1>
-  <p>Tech trouble. Soothed.</p>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+
+      <a class="brand" href="#top">
+        <div class="brand-mark"></div>
+        <div>Sooth <span>IT</span></div>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#problems">Get help</a>
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#promise">Our promise</a>
+        <a class="nav-cta" href="#support">Get Soothed →</a>
+      </nav>
+
+      <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        aria-label="Open navigation"
+      >
+        ☰
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+  <main id="top">
+
+    <section class="hero">
+
+      <div class="container hero-inner">
+
+        <div>
+
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Personal IT support, made human
+          </div>
+
+          <h1>
+            Tech trouble.
+            <span>Soothed.</span>
+          </h1>
+
+          <p class="hero-copy">
+            Computers, Wi-Fi, email and everyday technology shouldn't leave you
+            frustrated. Tell us what's happening. We'll help make sense of it,
+            fix what we can, and explain everything clearly.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#problems">
+              What needs soothing? →
+            </a>
+
+            <a class="btn btn-secondary" href="#how">
+              See how Sooth works
+            </a>
+          </div>
+
+          <div class="hero-note">
+            ✓ Clear guidance &nbsp; • &nbsp; No unnecessary tech jargon
+          </div>
+
+        </div>
+
+        <div class="hero-visual">
+
+          <div class="calm-orbit">
+
+            <div class="center-card">
+              <div class="center-icon">✓</div>
+              <strong>All soothed.</strong>
+              <span>Your technology, feeling simple again.</span>
+            </div>
+
+            <div class="float-card float-a">
+              📶 <b>Wi-Fi</b><br>
+              Connected again
+            </div>
+
+            <div class="float-card float-b">
+              💻 <b>Laptop</b><br>
+              Running smoothly
+            </div>
+
+            <div class="float-card float-c">
+              🛡️ <b>Security</b><br>
+              Looking safer
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRUST -->
+    <div class="trust-strip">
+
+      <div class="container trust-inner">
+
+        <div class="trust-item">
+          <strong>Human help</strong>
+          Talk to people, not confusing systems
+        </div>
+
+        <div class="trust-item">
+          <strong>Plain language</strong>
+          We explain things simply
+        </div>
+
+        <div class="trust-item">
+          <strong>Personal support</strong>
+          Built for everyday users
+        </div>
+
+        <div class="trust-item">
+          <strong>South African</strong>
+          Support designed around you
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PROBLEMS -->
+    <section class="problems" id="problems">
+
+      <div class="container">
+
+        <div class="section-head">
+          <span class="section-kicker">Start with the problem</span>
+
+          <h2>What needs soothing?</h2>
+
+          <p>
+            You don't need to know the technical name for the problem.
+            Just choose what sounds closest to what you're experiencing.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+
+          <button
+            class="problem-card"
+            data-problem="My computer is giving me trouble"
+          >
+            <div class="problem-icon">💻</div>
+            <h3>My computer is giving me trouble</h3>
+            <p>Crashes, errors, strange behaviour or something just isn't right.</p>
+            <span class="problem-arrow">→</span>
+          </button>
+
+          <button
+            class="problem-card"
+            data-problem="My Wi-Fi is not behaving"
+          >
+            <div class="problem-icon">📶</div>
+            <h3>My Wi-Fi isn't behaving</h3>
+            <p>Slow internet, dropped connections or devices refusing to connect.</p>
+            <span class="problem-arrow">→</span>
+          </button>
+
+          <button
+            class="problem-card"
+            data-problem="I need help with email"
+          >
+            <div class="problem-icon">✉️</div>
+            <h3>I need help with email</h3>
+            <p>Outlook, account setup, syncing, passwords or sending and receiving.</p>
+            <span class="problem-arrow">→</span>
+          </button>
+
+          <button
+            class="problem-card"
+            data-problem="I think something suspicious is happening"
+          >
+            <div class="problem-icon">🛡️</div>
+            <h3>Something suspicious is happening</h3>
+            <p>Pop-ups, strange activity, scams, malware or account concerns.</p>
+            <span class="problem-arrow">→</span>
+          </button>
+
+          <button
+            class="problem-card"
+            data-problem="My computer is painfully slow"
+          >
+            <div class="problem-icon">🐌</div>
+            <h3>My computer is painfully slow</h3>
+            <p>Long startup times, freezing, slow apps or poor performance.</p>
+            <span class="problem-arrow">→</span>
+          </button>
+
+          <button
+            class="problem-card"
+            data-problem="I have a new device to set up"
+          >
+            <div class="problem-icon">✨</div>
+            <h3>I have a new device</h3>
+            <p>Setup, updates, applications, email, security and getting started.</p>
+            <span class="problem-arrow">→</span>
+          </button>
+
+          <button
+            class="problem-card"
+            data-problem="I need help with backups or my files"
+          >
+            <div class="problem-icon">☁️</div>
+            <h3>Backups or files</h3>
+            <p>Cloud storage, OneDrive, backups, missing files and organisation.</p>
+            <span class="problem-arrow">→</span>
+          </button>
+
+          <button
+            class="problem-card"
+            data-problem="Something else"
+          >
+            <div class="problem-icon">💬</div>
+            <h3>Something else</h3>
+            <p>Technology rarely fits neatly into a box. Tell us what's happening.</p>
+            <span class="problem-arrow">→</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+
+      <div class="container">
+
+        <div class="section-head">
+          <span class="section-kicker">The Sooth experience</span>
+          <h2>From frustration to calm.</h2>
+          <p>
+            Getting IT help shouldn't be another problem you need to solve.
+          </p>
+        </div>
+
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-number">01</div>
+            <h3>Tell us</h3>
+            <p>
+              Describe what's happening in your own words.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">02</div>
+            <h3>We understand</h3>
+            <p>
+              We identify what's likely going wrong and explain the next step.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">03</div>
+            <h3>We help fix it</h3>
+            <p>
+              Remote or guided support gets your technology working again.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">✓</div>
+            <h3>All soothed.</h3>
+            <p>
+              You understand what happened and what to do next.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+
+      <div class="container">
+
+        <div class="section-head">
+          <span class="section-kicker">Everyday technology support</span>
+          <h2>Help for the technology you actually use.</h2>
+          <p>
+            Sooth IT starts with individuals, households, students and remote
+            workers — not enterprise complexity.
+          </p>
+        </div>
+
+        <div class="service-grid">
+
+          <div class="service-card">
+            <div class="service-icon">💻</div>
+            <h3>Remote IT Support</h3>
+            <p>
+              Troubleshooting Windows, software, devices, errors and everyday computer problems.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🚀</div>
+            <h3>Computer Care</h3>
+            <p>
+              Performance checks, updates, clean-ups and practical optimisation.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">📶</div>
+            <h3>Wi-Fi & Home Networks</h3>
+            <p>
+              Connectivity, routers, printers and getting your devices talking again.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">✉️</div>
+            <h3>Email & Microsoft 365</h3>
+            <p>
+              Outlook, Microsoft 365, OneDrive, account setup and email troubleshooting.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">✨</div>
+            <h3>New Device Setup</h3>
+            <p>
+              Turn a new laptop or PC into something that's ready for your life.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🛡️</div>
+            <h3>Personal Cybersecurity</h3>
+            <p>
+              MFA, passwords, malware concerns, scams and practical account protection.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROMISE -->
+    <section id="promise">
+
+      <div class="container promise-layout">
+
+        <div class="promise-art">
+
+          <div class="promise-art-card">
+            <span>THE SOOTH WAY</span>
+            <h3>“Here's what happened.”</h3>
+            <p>
+              Not a wall of technical language. Just a clear explanation of the
+              problem, what we're doing and what comes next.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="promise-copy">
+
+          <span class="section-kicker">The Sooth Promise</span>
+
+          <h2>
+            Technology shouldn't make you feel small.
+          </h2>
+
+          <p>
+            Good IT support isn't about showing how much we know.
+            It's about making technology easier for you to understand and use.
+          </p>
+
+          <div class="promise-points">
+
+            <div class="promise-point">
+              <div class="check">✓</div>
+              <div>
+                <strong>No unnecessary tech jargon</strong><br>
+                We explain things in normal language.
+              </div>
+            </div>
+
+            <div class="promise-point">
+              <div class="check">✓</div>
+              <div>
+                <strong>No mystery around the work</strong><br>
+                You should understand what we're doing.
+              </div>
+            </div>
+
+            <div class="promise-point">
+              <div class="check">✓</div>
+              <div>
+                <strong>No judgement</strong><br>
+                There are no silly technology questions here.
+              </div>
+            </div>
+
+            <div class="promise-point">
+              <div class="check">✓</div>
+              <div>
+                <strong>Security matters</strong><br>
+                Access to your device should always be handled carefully.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FAQ -->
+    <section class="faq">
+
+      <div class="container">
+
+        <div class="section-head">
+          <span class="section-kicker">Before you hand over your technology</span>
+          <h2>Questions you should ask.</h2>
+          <p>
+            Trust matters when someone is helping with your personal technology.
+          </p>
+        </div>
+
+        <div class="faq-grid">
+
+          <details>
+            <summary>Can you help me remotely?</summary>
+            <p>
+              Many software, email, configuration and troubleshooting problems can
+              be diagnosed or resolved remotely. If the problem requires physical
+              repair, we'll tell you.
+            </p>
+          </details>
+
+          <details>
+            <summary>Do I need to understand computers?</summary>
+            <p>
+              No. Explain what you're seeing or experiencing in your own words.
+              Figuring out the technical part is our job.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is remote support safe?</summary>
+            <p>
+              Remote access should always happen with your knowledge and consent.
+              We will build Sooth's support process around transparent and controlled access.
+            </p>
+          </details>
+
+          <details>
+            <summary>What if you can't fix my problem?</summary>
+            <p>
+              We should be clear about what can be fixed remotely and when a device
+              needs physical inspection, repair or specialist assistance.
+            </p>
+          </details>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SUPPORT -->
+    <section class="support" id="support">
+
+      <div class="container support-layout">
+
+        <div class="support-copy">
+
+          <span class="section-kicker" style="color:#6bd2ff">
+            Start here
+          </span>
+
+          <h2>
+            Tell Sooth what's wrong.
+          </h2>
+
+          <p>
+            Don't worry about getting the terminology right. Tell us what you're
+            seeing, what changed, or what isn't working.
+          </p>
+
+          <div class="support-mini">
+            <div>✓ Start with the problem, not the technical diagnosis.</div>
+            <div>✓ We'll keep the next steps clear.</div>
+            <div>✓ Your support history will eventually live in your Sooth account.</div>
+          </div>
+
+        </div>
+
+
+        <div class="support-box">
+
+          <h3>What needs soothing?</h3>
+
+          <p>
+            This is our first support-request experience. We'll connect it to the
+            secure customer platform next.
+          </p>
+
+          <form id="supportForm">
+
+            <div class="field">
+              <label for="name">Your name</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="What should we call you?"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="problemSelect">What's happening?</label>
+
+              <select id="problemSelect" required>
+                <option value="">Choose the closest option</option>
+                <option>My computer is giving me trouble</option>
+                <option>My Wi-Fi is not behaving</option>
+                <option>I need help with email</option>
+                <option>I think something suspicious is happening</option>
+                <option>My computer is painfully slow</option>
+                <option>I have a new device to set up</option>
+                <option>I need help with backups or my files</option>
+                <option>Something else</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="description">Tell us what you're seeing</label>
+
+              <textarea
+                id="description"
+                placeholder="For example: My laptop starts normally but Outlook keeps saying Connecting..."
+                required
+              ></textarea>
+            </div>
+
+            <button class="btn btn-primary" style="width:100%" type="submit">
+              Preview my support request →
+            </button>
+
+            <div class="form-note">
+              This preview does not send your information anywhere yet.
+              Secure support submission will be connected next.
+            </div>
+
+            <div class="support-result" id="supportResult"></div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+
+      <div class="container">
+
+        <div class="final-card">
+
+          <span class="section-kicker">Sooth IT</span>
+
+          <h2>
+            Enough fighting with your technology.
+          </h2>
+
+          <p>
+            Let's make it feel simple again.
+          </p>
+
+          <a class="btn btn-primary" href="#support">
+            Let's get it soothed →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-top">
+
+        <div>
+
+          <div class="brand footer-brand">
+            <div class="brand-mark"></div>
+            <div>Sooth <span>IT</span></div>
+          </div>
+
+          <p class="footer-copy">
+            Personal technology support designed to take the frustration out of
+            computers, Wi-Fi, email and everyday technology.
+          </p>
+
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#problems">Get help</a>
+          <a href="#services">Services</a>
+          <a href="#how">How it works</a>
+          <a href="#promise">The Sooth Promise</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Sooth IT</h4>
+          <a href="#support">Get Soothed</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">About</a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © <span id="year"></span> Sooth IT. All rights reserved.
+        </div>
+
+        <div>
+          Tech trouble. Soothed.
+        </div>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    mobileToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+      });
+    });
+
+
+    const problemCards = document.querySelectorAll(".problem-card");
+    const problemSelect = document.getElementById("problemSelect");
+
+    problemCards.forEach(card => {
+
+      card.addEventListener("click", () => {
+
+        problemCards.forEach(item => {
+          item.classList.remove("active");
+        });
+
+        card.classList.add("active");
+
+        const problem = card.dataset.problem;
+
+        problemSelect.value = problem;
+
+        document
+          .getElementById("support")
+          .scrollIntoView({ behavior: "smooth" });
+
+      });
+
+    });
+
+
+    const supportForm = document.getElementById("supportForm");
+    const supportResult = document.getElementById("supportResult");
+
+    supportForm.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const problem = problemSelect.value;
+      const description =
+        document.getElementById("description").value.trim();
+
+      supportResult.style.display = "block";
+
+      supportResult.innerHTML = `
+        <strong>Your Sooth request is ready.</strong><br><br>
+        Hi ${escapeHtml(name)}. You've told us that:
+        <strong>${escapeHtml(problem)}</strong>.<br><br>
+        Once we connect the secure customer system, this information will
+        become your first support request.
+      `;
+
+    });
+
+
+    function escapeHtml(value) {
+
+      return value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+  </script>
+
 </body>
 </html>
