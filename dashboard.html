@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>My Sooth | Support dashboard</title><meta name="theme-color" content="#07111f">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--navy:#07111f;--navy2:#0d1c2f;--blue:#59b7ff;--mint:#68e0c1;--text:#142235;--muted:#657487;--line:#dfe7ef;--bg:#f5f8fb;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:10}.nav{width:min(1160px,calc(100% - 30px));margin:auto;height:72px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:900;font-size:1.2rem}.brand span{color:#6ed1ff}.nav-actions{display:flex;gap:10px;align-items:center}.ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.13);border-radius:999px;padding:9px 14px;cursor:pointer}
+main{width:min(1160px,calc(100% - 30px));margin:32px auto 70px}.hero{display:grid;grid-template-columns:1.4fr .6fr;gap:18px;margin-bottom:24px}.welcome,.quick{border-radius:24px;padding:28px;background:#fff;border:1px solid var(--line)}
+.welcome{background:linear-gradient(135deg,#07111f,#123553);color:#fff}.welcome p{color:#bfd0df}.welcome h1{margin:4px 0 10px;font-size:2.2rem;letter-spacing:-.04em}.quick strong{display:block;font-size:1.05rem;margin-bottom:8px}.quick p{color:var(--muted);font-size:.9rem}.primary{border:0;border-radius:999px;padding:12px 18px;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--mint));color:var(--navy);cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 340px;gap:22px}.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px}.card h2{margin:0 0 18px;font-size:1.25rem}.ticket{display:grid;grid-template-columns:90px 1fr auto;gap:14px;align-items:center;padding:17px 0;border-bottom:1px solid var(--line)}.ticket:last-child{border-bottom:0}
+.ticket-num{font-weight:900;color:#2787af}.ticket-title{font-weight:800}.ticket-meta{color:var(--muted);font-size:.84rem;margin-top:4px}.status{padding:7px 10px;border-radius:999px;font-size:.76rem;font-weight:850;background:#eef7fb;color:#2b7898;white-space:nowrap}
+.empty{padding:30px 8px;color:var(--muted);text-align:center}.profile-line{padding:11px 0;border-bottom:1px solid var(--line)}.profile-line small{display:block;color:var(--muted)}.profile-line strong{display:block;margin-top:3px}
+.modal{position:fixed;inset:0;background:rgba(3,10,18,.72);display:none;place-items:center;padding:20px;z-index:20}.modal.open{display:grid}.modal-card{width:min(620px,100%);background:#fff;border-radius:24px;padding:28px;max-height:90vh;overflow:auto}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.close{border:0;background:#eef3f7;width:38px;height:38px;border-radius:50%;font-size:1.2rem;cursor:pointer}
+.field{margin:15px 0}.field label{display:block;font-size:.84rem;font-weight:850;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px 13px}.field textarea{min-height:120px;resize:vertical}.note{font-size:.8rem;color:var(--muted)}.msg{display:none;margin:12px 0;padding:12px;border-radius:12px;background:#eef9ff;color:#28657d}
+@media(max-width:850px){.hero,.grid{grid-template-columns:1fr}.ticket{grid-template-columns:1fr auto}.ticket-num{grid-column:1/-1}}@media(max-width:520px){.nav-actions span{display:none}.welcome h1{font-size:1.7rem}.ticket{grid-template-columns:1fr}.status{justify-self:start}}
+</style>
+</head>
+<body>
+<header><div class="nav"><a class="brand" href="index.html" style="color:white;text-decoration:none">Sooth <span>IT</span></a><div class="nav-actions"><span id="navName">My Sooth</span><button class="ghost" id="logoutBtn">Sign out</button></div></div></header>
+<main>
+<div class="hero"><section class="welcome"><small>MY SOOTH</small><h1 id="welcomeTitle">Your technology support space.</h1><p>See your requests, follow progress and tell us when something new needs soothing.</p><button class="primary" id="newTicketTop">New support request →</button></section><section class="quick"><strong>Need help?</strong><p>Describe the problem in your own words. You do not need to diagnose it yourself.</p><button class="primary" id="newTicketSide">Get Soothed</button></section></div>
+<div class="grid">
+<section class="card"><h2>Your support requests</h2><div id="ticketList"><div class="empty">Loading your support history…</div></div></section>
+<aside class="card"><h2>Your profile</h2><div class="profile-line"><small>Name</small><strong id="profileName">—</strong></div><div class="profile-line"><small>Email</small><strong id="profileEmail">—</strong></div><div class="profile-line"><small>Support account</small><strong>Active</strong></div></aside>
+</div>
+</main>
+<div class="modal" id="ticketModal"><div class="modal-card"><div class="modal-head"><div><h2 style="margin:0">What needs soothing?</h2><div class="note">Tell us what is happening. We will take it from there.</div></div><button class="close" id="closeModal">×</button></div>
+<form id="ticketForm">
+<div class="field"><label>Category</label><select id="category" required><option value="">Choose one</option><option>Computer</option><option>Wi-Fi / Internet</option><option>Email / Microsoft 365</option><option>Security concern</option><option>Slow computer</option><option>New device setup</option><option>Backups / Files</option><option>Something else</option></select></div>
+<div class="field"><label>Short title</label><input id="subject" maxlength="120" placeholder="Example: Outlook keeps saying Connecting" required></div>
+<div class="field"><label>Tell us what you are seeing</label><textarea id="description" placeholder="What happened? When did it start? What have you tried?" required></textarea></div>
+<div class="field"><label>Screenshot or file (optional)</label><input id="attachment" type="file" accept=".png,.jpg,.jpeg,.webp,.pdf,.txt"><div class="note">Up to 10 MB. Please do not upload passwords or sensitive identity documents.</div></div>
+<div class="msg" id="ticketMsg"></div><button class="primary" id="submitTicket" type="submit" style="width:100%">Create support request →</button>
+</form></div></div>
+<script>
+const supabase=window.supabase.createClient('https://nmobkyotfisajamqcwev.supabase.co','sb_publishable_1pHty-KrtbRCnCNjybB1yw_ZmO_4NXv');
+let currentUser=null;
+const modal=document.getElementById('ticketModal'),ticketMsg=document.getElementById('ticketMsg');
+document.getElementById('newTicketTop').onclick=()=>modal.classList.add('open');document.getElementById('newTicketSide').onclick=()=>modal.classList.add('open');document.getElementById('closeModal').onclick=()=>modal.classList.remove('open');
+document.getElementById('logoutBtn').onclick=async()=>{await supabase.auth.signOut();location.href='auth.html'};
+function prettyStatus(s){return {open:'Open',in_progress:'In progress',waiting_on_customer:'Waiting on you',resolved:'Soothed',closed:'Closed'}[s]||s}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+async function loadTickets(){
+ const {data,error}=await supabase.from('support_requests').select('id,ticket_number,subject,category,status,priority,created_at').order('created_at',{ascending:false});
+ const list=document.getElementById('ticketList');
+ if(error){list.innerHTML='<div class="empty">Could not load requests.</div>';return}
+ if(!data.length){list.innerHTML='<div class="empty"><strong>No support requests yet.</strong><br>When technology misbehaves, start here.</div>';return}
+ list.innerHTML=data.map(t=>`<div class="ticket"><div class="ticket-num">#${String(t.ticket_number).padStart(5,'0')}</div><div><div class="ticket-title">${esc(t.subject)}</div><div class="ticket-meta">${esc(t.category)} · ${new Date(t.created_at).toLocaleDateString()}</div></div><div class="status">${prettyStatus(t.status)}</div></div>`).join('');
+}
+document.getElementById('ticketForm').addEventListener('submit',async e=>{
+ e.preventDefault();const btn=document.getElementById('submitTicket');btn.disabled=true;ticketMsg.style.display='none';
+ try{
+  const category=document.getElementById('category').value,subject=document.getElementById('subject').value.trim(),description=document.getElementById('description').value.trim();
+  const {data:request,error}=await supabase.from('support_requests').insert({user_id:currentUser.id,category,subject,description}).select('id,ticket_number').single();
+  if(error)throw error;
+  const file=document.getElementById('attachment').files[0];
+  if(file){
+    if(file.size>10485760)throw new Error('That file is larger than 10 MB.');
+    const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');const path=`${currentUser.id}/${request.id}/${Date.now()}-${safe}`;
+    const {error:upErr}=await supabase.storage.from('support-attachments').upload(path,file,{upsert:false});if(upErr)throw upErr;
+    const {error:metaErr}=await supabase.from('support_attachments').insert({request_id:request.id,user_id:currentUser.id,storage_path:path,file_name:file.name,mime_type:file.type||null,file_size:file.size});if(metaErr)throw metaErr;
+  }
+  ticketMsg.style.display='block';ticketMsg.textContent=`Support request #${String(request.ticket_number).padStart(5,'0')} created.`;
+  document.getElementById('ticketForm').reset();await loadTickets();setTimeout(()=>modal.classList.remove('open'),1100);
+ }catch(err){ticketMsg.style.display='block';ticketMsg.textContent=err.message||'Could not create the support request.'}finally{btn.disabled=false}
+});
+(async()=>{
+ const {data:{session}}=await supabase.auth.getSession();if(!session){location.href='auth.html';return}currentUser=session.user;
+ document.getElementById('profileEmail').textContent=currentUser.email||'—';
+ const {data:profile}=await supabase.from('profiles').select('full_name').eq('id',currentUser.id).maybeSingle();
+ const name=profile?.full_name||currentUser.user_metadata?.full_name||'there';document.getElementById('profileName').textContent=name;document.getElementById('navName').textContent=name;document.getElementById('welcomeTitle').textContent=`Hi ${name.split(' ')[0]}, what needs soothing?`;await loadTickets();
+})();
+</script>
+</body></html>

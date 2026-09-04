@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sooth IT | Sign in</title>
+<meta name="theme-color" content="#07111f">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--navy:#07111f;--blue:#59b7ff;--mint:#68e0c1;--text:#142235;--muted:#637083;--line:#dfe7ef}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:linear-gradient(145deg,#06101d,#0a2237);min-height:100vh;display:grid;place-items:center;padding:24px;color:var(--text)}
+.shell{width:min(980px,100%);display:grid;grid-template-columns:1fr 1fr;background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.3)}
+.brand{padding:54px;background:radial-gradient(circle at 25% 20%,rgba(89,183,255,.22),transparent 35%),var(--navy);color:white}
+.mark{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--blue),var(--mint));display:grid;place-items:center;font-weight:900;color:var(--navy);margin-bottom:34px}
+.brand h1{font-size:3rem;line-height:.95;margin:0 0 18px;letter-spacing:-.05em}.brand p{color:#b7c7d8;line-height:1.7}
+.panel{padding:54px}.tabs{display:flex;gap:8px;margin-bottom:26px}.tab{border:1px solid var(--line);background:#f7fafc;padding:10px 16px;border-radius:999px;font-weight:800;cursor:pointer}
+.tab.active{background:var(--navy);color:white}.field{margin:14px 0}.field label{display:block;font-size:.85rem;font-weight:800;margin-bottom:7px}
+.field input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:13px;font:inherit}.btn{width:100%;border:0;border-radius:999px;padding:14px 18px;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--mint));color:var(--navy);margin-top:10px;cursor:pointer}
+.btn:disabled{opacity:.6;cursor:not-allowed}.msg{margin-top:16px;padding:12px 14px;border-radius:12px;background:#eef8ff;color:#28657d;display:none}
+.small{font-size:.82rem;color:var(--muted);margin-top:16px}.back{display:inline-block;margin-top:20px;color:#2b8eb8;font-weight:800;text-decoration:none}
+@media(max-width:760px){.shell{grid-template-columns:1fr}.brand{padding:36px}.panel{padding:34px}.brand h1{font-size:2.3rem}}
+</style>
+</head>
+<body>
+<div class="shell">
+<section class="brand"><div class="mark">S</div><h1>Welcome to<br>My Sooth.</h1><p>Your private space for support requests, updates and technology help.</p></section>
+<section class="panel">
+<div class="tabs"><button class="tab active" id="loginTab" type="button">Sign in</button><button class="tab" id="signupTab" type="button">Create account</button></div>
+<form id="authForm">
+<div class="field" id="nameField" style="display:none"><label>Full name</label><input id="fullName" autocomplete="name"></div>
+<div class="field"><label>Email</label><input id="email" type="email" autocomplete="email" required></div>
+<div class="field"><label>Password</label><input id="password" type="password" minlength="8" autocomplete="current-password" required></div>
+<button class="btn" id="submitBtn">Sign in →</button><div class="msg" id="msg"></div>
+</form>
+<div class="small">Keep your sign-in details private. Sooth IT will never ask you to send us your password.</div>
+<a class="back" href="index.html">← Back to Sooth IT</a>
+</section>
+</div>
+<script>
+const supabase=window.supabase.createClient('https://nmobkyotfisajamqcwev.supabase.co','sb_publishable_1pHty-KrtbRCnCNjybB1yw_ZmO_4NXv');
+let mode='login';
+const loginTab=document.getElementById('loginTab'),signupTab=document.getElementById('signupTab'),nameField=document.getElementById('nameField'),submitBtn=document.getElementById('submitBtn'),msg=document.getElementById('msg');
+function setMode(next){mode=next;loginTab.classList.toggle('active',mode==='login');signupTab.classList.toggle('active',mode==='signup');nameField.style.display=mode==='signup'?'block':'none';submitBtn.textContent=mode==='signup'?'Create my account →':'Sign in →';document.getElementById('password').autocomplete=mode==='signup'?'new-password':'current-password';msg.style.display='none'}
+loginTab.onclick=()=>setMode('login'); signupTab.onclick=()=>setMode('signup');
+document.getElementById('authForm').addEventListener('submit',async e=>{
+  e.preventDefault(); msg.style.display='none'; submitBtn.disabled=true;
+  const email=document.getElementById('email').value.trim(),password=document.getElementById('password').value,full_name=document.getElementById('fullName').value.trim();
+  try{
+    if(mode==='signup'){
+      if(!full_name) throw new Error('Please enter your full name.');
+      const {data,error}=await supabase.auth.signUp({email,password,options:{data:{full_name},emailRedirectTo:location.origin+'/auth.html'}});
+      if(error) throw error;
+      msg.style.display='block';
+      msg.textContent=data.session?'Account created. Opening My Sooth…':'Account created. Check your email to confirm your address, then sign in.';
+      if(data.session) setTimeout(()=>location.href='dashboard.html',600);
+    } else {
+      const {error}=await supabase.auth.signInWithPassword({email,password});
+      if(error) throw error; location.href='dashboard.html';
+    }
+  }catch(err){msg.style.display='block';msg.textContent=err.message||'Something went wrong.'}finally{submitBtn.disabled=false}
+});
+(async()=>{const {data:{session}}=await supabase.auth.getSession();if(session)location.href='dashboard.html'})();
+</script>
+</body></html>
