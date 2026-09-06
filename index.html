@@ -1183,6 +1183,62 @@
         bottom: 6px;
       }
     }
+    /* MOBILE HERO VISUAL FIX */
+@media (max-width: 600px) {
+
+  .hero-visual {
+    min-height: auto;
+    padding: 28px 0 18px;
+  }
+
+  .calm-orbit {
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: auto;
+    border-radius: 28px;
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: none;
+  }
+
+  .calm-orbit::before,
+  .calm-orbit::after {
+    display: none;
+  }
+
+  .center-card {
+    width: 100%;
+    padding: 22px 18px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .center-icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 12px;
+    border-radius: 18px;
+    font-size: 1.6rem;
+  }
+
+  .float-card {
+    position: static;
+    width: 100%;
+    max-width: none;
+    padding: 12px 14px;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    z-index: 1;
+  }
+
+  .float-a,
+  .float-b,
+  .float-c {
+    position: static;
+  }
+}
   </style>
 </head>
 
